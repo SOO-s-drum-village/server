@@ -61,7 +61,7 @@ public class SecurityConfig {
   public EmailPasswordAuthFilter emailPasswordAuthFilter() {
     EmailPasswordAuthFilter filter = new EmailPasswordAuthFilter("/auth/login/email",objectMapper);
     filter.setAuthenticationManager(authenticationManager());
-    filter.setAuthenticationSuccessHandler(new LoginSuccessHandler(objectMapper));
+    filter.setAuthenticationSuccessHandler(new LoginSuccessHandler());
     filter.setAuthenticationFailureHandler(new LoginFailHandler(objectMapper));
     filter.setSecurityContextRepository(new HttpSessionSecurityContextRepository());
 

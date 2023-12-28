@@ -20,8 +20,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 @RequiredArgsConstructor
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
-  private final ObjectMapper objectMapper;
-
   @Override
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
     UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
