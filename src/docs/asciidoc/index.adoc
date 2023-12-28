@@ -1,0 +1,14 @@
+= SOO’s drum village API
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+
+== Auth
+=== 회원가입
+==== request
+include::{snippets}/signup/http-request.adoc[]
+include::{snippets}/signup/curl-request.adoc[]
+include::{snippets}/signup/request-fields.adoc[]
+
+==== response
+include::{snippets}/signup/http-response.adoc[]
