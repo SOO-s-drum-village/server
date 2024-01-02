@@ -1,6 +1,5 @@
 package com.drum_village_server.api.config;
 
-
 import com.drum_village_server.api.domain.Order;
 import com.drum_village_server.api.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,20 +9,17 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.RepositoryItemReader;
 import org.springframework.batch.item.data.builder.RepositoryItemReaderBuilder;
-import org.springframework.batch.item.support.ListItemReader;
+import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,43 +28,50 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JobConfig {
 
+  private final JobRepository jobRepository;
+  private final PlatformTransactionManager transactionManager;
   private final OrderRepository orderRepository;
+
   @Bean
-  public Job simpleJob1(JobRepository jobRepository, Step simpleStep1) {
-    return new JobBuilder("simpleJob", jobRepository)
+  public Job simpleJob1(Step step1) {
+    return new JobBuilder("orderJob3", jobRepository)
       .listener(new JobLoggerListener())
-      .start(simpleStep1)
-      .build();
-  }
-  @Bean
-  public Step simpleStep1(JobRepository jobRepository, ItemReader ordersReader, PlatformTransactionManager transactionManager){
-    return new StepBuilder("simpleStep1", jobRepository)
-      .chunk(2, transactionManager)
-      .reader(new ListItemReader<>(Arrays.asList("data1", "data2", "data3", "data4", "data5", "data6", "data7", "data8", "data9", "data10")))
-      .processor(new ItemProcessor<String, String>() {
-        @Override
-        public String process(String data) throws Exception {
-          System.out.println("data = " + data);
-          return data + "_A";
-        }
-      })
-      .writer(new ItemWriter<String>() {
-        @Override
-        public void write(List<String> items) throws Exception {
-          items.forEach(System.out::println);
-        }
-      })
+      .start(step1)
       .build();
   }
 
   @Bean
-  public RepositoryItemReader<Order> ordersReader() {
+  public Step step1(ItemReader orderReader, ItemProcessor orderProcessor, ItemWriter orderWriter) {
+    return new StepBuilder("orderStep", jobRepository)
+      .chunk(3, transactionManager)
+      .reader(orderReader)
+      .processor(orderProcessor)
+      .writer(orderWriter)
+      .build();
+  }
+
+  @Bean
+  public ItemWriter<Order> orderWriter() {
+    return new RepositoryItemWriterBuilder<Order>()
+      .repository(orderRepository)
+      .methodName("save")
+      .build();
+  }
+
+
+  @Bean
+  public ItemProcessor<Order, Order> orderProcessor() {
+    return item -> item.editIsDone(false);
+  }
+
+  @Bean
+  public RepositoryItemReader<Order> orderReader() {
     return new RepositoryItemReaderBuilder<Order>()
-      .name("ordersReader")
+      .name("repositoryItemReader")
       .repository(orderRepository)
       .methodName("findAll")
-      .pageSize(2)
-      .arguments(Arrays.asList())
+      .pageSize(5)
+      .arguments(List.of())
       .sorts(Collections.singletonMap("id", Sort.Direction.ASC))
       .build();
   }

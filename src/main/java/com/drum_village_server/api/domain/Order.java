@@ -25,7 +25,8 @@ public class Order {
     this.amount = amount;
   }
 
-  public void editIsDone(Boolean isDone) {
+  public Order editIsDone(Boolean isDone) {
     this.isDone = isDone;
+    return this;
   }
 }
