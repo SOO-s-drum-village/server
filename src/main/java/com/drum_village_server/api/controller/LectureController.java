@@ -19,8 +19,8 @@ public class LectureController {
   private final LectureService lectureService;
 
   @GetMapping("/lectures")
-  public List<LectureResponse>  getList(@ModelAttribute LectureSearch request) {
-    log.info(">>>>>>>{}",request);
+  public List<LectureResponse> getList(@ModelAttribute LectureSearch request) {
+    request.validate();
     return lectureService.getList(request);
   }
 }

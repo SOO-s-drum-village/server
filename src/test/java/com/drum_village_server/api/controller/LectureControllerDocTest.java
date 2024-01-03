@@ -22,7 +22,6 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
@@ -95,7 +94,7 @@ class LectureControllerDocTest {
     lectureCategoryRepository.saveAll(List.of(lectureCategory1, lectureCategory2, lectureCategory3, lectureCategory4));
 
     //expected
-    this.mockMvc.perform(get("/lectures?page=1&size=2")
+    this.mockMvc.perform(get("/lectures?page=1&size=2&category=BASIC&direction=DESC")
         .contentType(APPLICATION_JSON)
       )
       .andExpect(status().isOk())
@@ -106,7 +105,11 @@ class LectureControllerDocTest {
           parameterWithName("page").description("페이지 번호").optional()
             .attributes(key("type").value("Number")),
           parameterWithName("size").description("조회 개수").optional()
-            .attributes(key("type").value("Number"))
+            .attributes(key("type").value("Number")),
+          parameterWithName("category").description("강의 카테고리").optional()
+            .attributes(key("type").value("LectureEnumCategory")),
+          parameterWithName("direction").description("조회 정렬 방향").optional()
+            .attributes(key("type").value("Direction"))
         ),
         responseFields(
           fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("강의 ID"),
@@ -116,4 +119,5 @@ class LectureControllerDocTest {
         )
       ));
   }
+
 }

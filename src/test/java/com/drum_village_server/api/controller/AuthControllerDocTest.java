@@ -1,6 +1,8 @@
 package com.drum_village_server.api.controller;
 
+import com.drum_village_server.api.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,6 +35,14 @@ class AuthControllerDocTest {
 
   @Autowired
   private ObjectMapper objectMapper;
+
+  @Autowired
+  private UserRepository userRepository;=
+
+  @BeforeEach
+  void clean() {;
+    userRepository.deleteAll();
+  }
 
   @Test
   @DisplayName("회원 가입")

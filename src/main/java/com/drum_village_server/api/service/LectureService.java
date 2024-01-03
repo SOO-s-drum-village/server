@@ -16,17 +16,22 @@ public class LectureService {
   private final LectureRepository lectureRepository;
 
   public List<LectureResponse> getList(LectureSearch request) {
-    System.out.println(request.getCategory());
-    if (request.getCategory() != null) {
-      return lectureRepository.findByCategories(request.getCategory(), request.toPageable())
-        .stream()
-        .map(LectureResponse::new)
-        .toList();
-    } else {
-      return lectureRepository.findAll(request.toPageable())
-        .stream()
-        .map(LectureResponse::new)
-        .toList();
-    }
+    return (request.getCategory() != null)
+      ? getLecturesByCategory(request)
+      : getAllLectures(request);
+  }
+
+  private List<LectureResponse> getLecturesByCategory(LectureSearch request) {
+    return lectureRepository.findByCategories_NameIn(List.of(request.getCategory()), request.toPageable())
+      .stream()
+      .map(LectureResponse::new)
+      .toList();
+  }
+
+  private List<LectureResponse> getAllLectures(LectureSearch request) {
+    return lectureRepository.findAll(request.toPageable())
+      .stream()
+      .map(LectureResponse::new)
+      .toList();
   }
 }
