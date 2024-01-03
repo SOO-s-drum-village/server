@@ -1,5 +1,6 @@
-package com.drum_village_server.api.config;
+package com.drum_village_server.api.batch;
 
+import com.drum_village_server.api.config.JobLoggerListener;
 import com.drum_village_server.api.domain.Order;
 import com.drum_village_server.api.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ import java.util.List;
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
-public class JobConfig {
+public class OrderJob {
 
   private final JobRepository jobRepository;
   private final PlatformTransactionManager transactionManager;
@@ -35,7 +36,7 @@ public class JobConfig {
 
   @Bean
   public Job simpleJob1(Step step1) {
-    return new JobBuilder("orderJob3", jobRepository)
+    return new JobBuilder("step111111" + System.currentTimeMillis(), jobRepository)
       .listener(new JobLoggerListener())
       .start(step1)
       .build();
@@ -62,7 +63,7 @@ public class JobConfig {
 
   @Bean
   public ItemProcessor<Order, Order> orderProcessor() {
-    return item -> item.editIsDone(false);
+    return item -> item.editIsDone(true);
   }
 
   @Bean
@@ -71,7 +72,7 @@ public class JobConfig {
       .name("repositoryItemReader")
       .repository(orderRepository)
       .methodName("findAll")
-      .pageSize(5)
+      .pageSize(1)
       .arguments(List.of())
       .sorts(Collections.singletonMap("id", Sort.Direction.ASC))
       .build();
