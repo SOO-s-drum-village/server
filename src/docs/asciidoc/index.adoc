@@ -12,3 +12,14 @@ include::{snippets}/signup/request-fields.adoc[]
 
 ==== response
 include::{snippets}/signup/http-response.adoc[]
+
+== Lecture
+=== 강의 목록 조회
+==== 요청
+include::{snippets}/get-lecture-list/http-request.adoc[]
+include::{snippets}/get-lecture-list/curl-request.adoc[]
+include::{snippets}/get-lecture-list/query-parameters.adoc[]
+
+==== 응답
+include::{snippets}/get-lecture-list/http-response.adoc[]
+include::{snippets}/get-lecture-list/response-fields.adoc[]

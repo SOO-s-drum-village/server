@@ -20,7 +20,7 @@ public class OrderScheduler {
   private final JobLauncher jobLauncher;
   private final OrderJob orderJob;
 
-  @Scheduled(cron = "*/5 * * * * *")
+//  @Scheduled(cron = "*/5 * * * * *")
   public void cronTest() {
     try {
       RepositoryItemReader<Order> reader = orderJob.orderReader();

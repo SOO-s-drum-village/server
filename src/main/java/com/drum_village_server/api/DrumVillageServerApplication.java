@@ -11,5 +11,4 @@ public class DrumVillageServerApplication {
   public static void main(String[] args) {
     SpringApplication.run(DrumVillageServerApplication.class, args);
   }
-
 }
