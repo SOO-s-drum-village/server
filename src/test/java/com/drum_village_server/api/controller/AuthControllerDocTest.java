@@ -37,7 +37,7 @@ class AuthControllerDocTest {
   private ObjectMapper objectMapper;
 
   @Autowired
-  private UserRepository userRepository;=
+  private UserRepository userRepository;
 
   @BeforeEach
   void clean() {;
