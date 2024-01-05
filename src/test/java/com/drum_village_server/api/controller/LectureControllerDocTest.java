@@ -107,8 +107,8 @@ class LectureControllerDocTest {
             .attributes(key("type").value("Number")),
           parameterWithName("category").description("link:index.html#_lecturecategory[상태 코드]").optional()
             .attributes(key("type").value("LectureCategory")),
-          parameterWithName("direction").description("조회 정렬 방향").optional()
-            .attributes(key("type").value("Direction"))
+          parameterWithName("direction").description("link:index.html#_sortdirection[상태 코드]").optional()
+            .attributes(key("type").value("SortDirection"))
         ),
         responseFields(
           fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("강의 ID"),

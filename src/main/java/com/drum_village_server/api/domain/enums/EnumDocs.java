@@ -11,4 +11,5 @@ import java.util.Map;
 @AllArgsConstructor
 public class EnumDocs {
   Map<String,String> LectureEnumCategory;
+  Map<String,String> SortDirection;
 }

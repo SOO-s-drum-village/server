@@ -27,3 +27,5 @@ include::{snippets}/get-lecture-list/response-fields.adoc[]
 == ENUM
 === LectureCategory
 include::{snippets}/custom-response/custom-response-fields-lectureEnumCategory.adoc[]
+=== SortDirection
+include::{snippets}/custom-response/custom-response-fields-sortDirection.adoc[]

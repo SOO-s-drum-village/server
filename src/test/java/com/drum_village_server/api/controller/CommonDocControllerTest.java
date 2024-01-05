@@ -63,7 +63,11 @@ class CommonDocControllerTest {
         customResponseFields("custom-response", beneathPath("data.lectureEnumCategory").withSubsectionId("lectureEnumCategory"),
           attributes(key("title").value("lectureEnumCategory")),
           enumConvertFieldDescriptor((enumDocs.getLectureEnumCategory()))
-        )
+        ),
+        customResponseFields("custom-response", beneathPath("data.sortDirection").withSubsectionId("sortDirection"),
+          attributes(key("title").value("sortDirection")),
+          enumConvertFieldDescriptor((enumDocs.getSortDirection()))
+          )
       ));
   }
 

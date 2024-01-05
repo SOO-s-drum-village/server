@@ -460,6 +460,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_enum">ENUM</a>
 <ul class="sectlevel2">
 <li><a href="#_lecturecategory">LectureCategory</a></li>
+<li><a href="#_sortdirection">SortDirection</a></li>
 </ul>
 </li>
 </ul>
@@ -481,9 +482,9 @@ Content-Length: 86
 Host: api-ssmusicweb.com
 
 {
-  "email" : "daniel@twosun.com",
   "name" : "Daniel Im",
-  "password" : "a123456!"
+  "password" : "a123456!",
+  "email" : "daniel@twosun.com"
 }</code></pre>
 </div>
 </div>
@@ -492,9 +493,9 @@ Host: api-ssmusicweb.com
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'https://api-ssmusicweb.com/auth/signup' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
     -d '{
-  "email" : "daniel@twosun.com",
   "name" : "Daniel Im",
-  "password" : "a123456!"
+  "password" : "a123456!",
+  "email" : "daniel@twosun.com"
 }'</code></pre>
 </div>
 </div>
@@ -612,9 +613,9 @@ Host: api-ssmusicweb.com</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>direction</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Direction</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SortDirection</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>true</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">조회 정렬 방향</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="index.html#_sortdirection">상태 코드</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -728,13 +729,38 @@ Content-Length: 201
 </tbody>
 </table>
 </div>
+<div class="sect2">
+<h3 id="_sortdirection">SortDirection</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">코드</th>
+<th class="tableblock halign-left valign-top">코드명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ASC</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">오름차순</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DESC</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">내림차순</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2024-01-05 11:26:39 +0900
+Last updated 2024-01-05 13:52:26 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

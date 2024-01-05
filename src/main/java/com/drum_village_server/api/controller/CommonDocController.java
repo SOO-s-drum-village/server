@@ -3,6 +3,7 @@ package com.drum_village_server.api.controller;
 import com.drum_village_server.api.domain.enums.EnumDocs;
 import com.drum_village_server.api.domain.enums.EnumType;
 import com.drum_village_server.api.domain.enums.LectureCategory;
+import com.drum_village_server.api.domain.enums.SortDirection;
 import com.drum_village_server.api.response.EnumResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +23,11 @@ public class CommonDocController {
   public EnumResponse<EnumDocs> findEnums() {
 
     Map<String, String> lectureEumCategory = getDocs(LectureCategory.values());
+    Map<String, String> sortDirection = getDocs(SortDirection.values());
 
     return EnumResponse.of(EnumDocs.builder()
       .LectureEnumCategory(lectureEumCategory)
+      .SortDirection(sortDirection)
       .build()
     );
   }
