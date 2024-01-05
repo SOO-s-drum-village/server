@@ -1,6 +1,6 @@
 package com.drum_village_server.api.request;
 
-import com.drum_village_server.api.domain.enums.LectureEnumCategory;
+import com.drum_village_server.api.domain.enums.LectureCategory;
 import com.drum_village_server.api.exception.InvalidRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class LectureSearch {
   private Integer page;
   private Integer size;
   private String sortBy;
-  private LectureEnumCategory category;
+  private LectureCategory category;
   private Sort.Direction direction;
 
   public LectureSearch() {

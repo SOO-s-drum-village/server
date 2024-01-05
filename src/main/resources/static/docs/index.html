@@ -457,6 +457,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_강의_목록_조회">강의 목록 조회</a></li>
 </ul>
 </li>
+<li><a href="#_enum">ENUM</a>
+<ul class="sectlevel2">
+<li><a href="#_lecturecategory">LectureCategory</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -476,9 +481,9 @@ Content-Length: 86
 Host: api-ssmusicweb.com
 
 {
-  "password" : "a123456!",
+  "email" : "daniel@twosun.com",
   "name" : "Daniel Im",
-  "email" : "daniel@twosun.com"
+  "password" : "a123456!"
 }</code></pre>
 </div>
 </div>
@@ -487,9 +492,9 @@ Host: api-ssmusicweb.com
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'https://api-ssmusicweb.com/auth/signup' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
     -d '{
-  "password" : "a123456!",
+  "email" : "daniel@twosun.com",
   "name" : "Daniel Im",
-  "email" : "daniel@twosun.com"
+  "password" : "a123456!"
 }'</code></pre>
 </div>
 </div>
@@ -560,14 +565,14 @@ X-Frame-Options: DENY</code></pre>
 <h4 id="_요청">요청</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /lectures?page=1&amp;size=2 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /lectures?page=1&amp;size=2&amp;category=BASIC&amp;direction=DESC HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: api-ssmusicweb.com</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'https://api-ssmusicweb.com/lectures?page=1&amp;size=2' -i -X GET \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'https://api-ssmusicweb.com/lectures?page=1&amp;size=2&amp;category=BASIC&amp;direction=DESC' -i -X GET \
     -H 'Content-Type: application/json;charset=UTF-8'</code></pre>
 </div>
 </div>
@@ -599,6 +604,18 @@ Host: api-ssmusicweb.com</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>true</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">조회 개수</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>category</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LectureCategory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>true</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="index.html#_lecturecategory">상태 코드</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>direction</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Direction</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>true</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">조회 정렬 방향</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -618,7 +635,7 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 193
+Content-Length: 201
 
 [ {
   "id" : 3,
@@ -626,10 +643,10 @@ Content-Length: 193
   "level" : 3,
   "categories" : [ "BASIC" ]
 }, {
-  "id" : 2,
-  "title" : "테스트 제목 2",
-  "level" : 2,
-  "categories" : [ "PRAISE" ]
+  "id" : 1,
+  "title" : "테스트 제목 1",
+  "level" : 1,
+  "categories" : [ "BASIC", "K_POP" ]
 } ]</code></pre>
 </div>
 </div>
@@ -679,11 +696,45 @@ Content-Length: 193
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_enum">ENUM</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_lecturecategory">LectureCategory</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">코드</th>
+<th class="tableblock halign-left valign-top">코드명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>K_POP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">한국가요</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PRAISE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">찬양</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BASIC</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">기본</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2024-01-03 16:34:22 +0900
+Last updated 2024-01-05 11:26:39 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

@@ -23,3 +23,7 @@ include::{snippets}/get-lecture-list/query-parameters.adoc[]
 ==== 응답
 include::{snippets}/get-lecture-list/http-response.adoc[]
 include::{snippets}/get-lecture-list/response-fields.adoc[]
+
+== ENUM
+=== LectureCategory
+include::{snippets}/custom-response/custom-response-fields-lectureEnumCategory.adoc[]

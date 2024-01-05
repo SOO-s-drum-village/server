@@ -1,6 +1,5 @@
 package com.drum_village_server.api.domain;
 
-import com.drum_village_server.api.domain.enums.LectureEnumCategory;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -19,14 +18,14 @@ public class LectureCategory {
 
   @Column(name = "name")
   @Enumerated(EnumType.STRING)
-  private LectureEnumCategory name;
+  private com.drum_village_server.api.domain.enums.LectureCategory name;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "lecture_id", nullable = false)
   private Lecture lecture;
 
   @Builder
-  public LectureCategory(Lecture lecture, LectureEnumCategory name) {
+  public LectureCategory(Lecture lecture, com.drum_village_server.api.domain.enums.LectureCategory name) {
     this.name = name;
     this.lecture = lecture;
   }

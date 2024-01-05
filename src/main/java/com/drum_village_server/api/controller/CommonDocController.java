@@ -2,7 +2,7 @@ package com.drum_village_server.api.controller;
 
 import com.drum_village_server.api.domain.enums.EnumDocs;
 import com.drum_village_server.api.domain.enums.EnumType;
-import com.drum_village_server.api.domain.enums.LectureEnumCategory;
+import com.drum_village_server.api.domain.enums.LectureCategory;
 import com.drum_village_server.api.response.EnumResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ public class CommonDocController {
   @GetMapping("/enums")
   public EnumResponse<EnumDocs> findEnums() {
 
-    Map<String, String> lectureEumCategory = getDocs(LectureEnumCategory.values());
+    Map<String, String> lectureEumCategory = getDocs(LectureCategory.values());
 
     return EnumResponse.of(EnumDocs.builder()
       .LectureEnumCategory(lectureEumCategory)

@@ -1,8 +1,7 @@
 package com.drum_village_server.api.controller;
 
 import com.drum_village_server.api.domain.Lecture;
-import com.drum_village_server.api.domain.LectureCategory;
-import com.drum_village_server.api.domain.enums.LectureEnumCategory;
+import com.drum_village_server.api.domain.enums.LectureCategory;
 import com.drum_village_server.api.repository.LectureCategoryRepository;
 import com.drum_village_server.api.repository.LectureRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -71,23 +70,23 @@ class LectureControllerDocTest {
 
     lectureRepository.saveAll(List.of(lecture1, lecture2, lecture3));
 
-    LectureCategory lectureCategory1 = LectureCategory.builder()
-      .name(LectureEnumCategory.BASIC)
+    com.drum_village_server.api.domain.LectureCategory lectureCategory1 = com.drum_village_server.api.domain.LectureCategory.builder()
+      .name(LectureCategory.BASIC)
       .lecture(lecture1)
       .build();
 
-    LectureCategory lectureCategory2 = LectureCategory.builder()
-      .name(LectureEnumCategory.K_POP)
+    com.drum_village_server.api.domain.LectureCategory lectureCategory2 = com.drum_village_server.api.domain.LectureCategory.builder()
+      .name(LectureCategory.K_POP)
       .lecture(lecture1)
       .build();
 
-    LectureCategory lectureCategory3 = LectureCategory.builder()
-      .name(LectureEnumCategory.PRAISE)
+    com.drum_village_server.api.domain.LectureCategory lectureCategory3 = com.drum_village_server.api.domain.LectureCategory.builder()
+      .name(LectureCategory.PRAISE)
       .lecture(lecture2)
       .build();
 
-    LectureCategory lectureCategory4 = LectureCategory.builder()
-      .name(LectureEnumCategory.BASIC)
+    com.drum_village_server.api.domain.LectureCategory lectureCategory4 = com.drum_village_server.api.domain.LectureCategory.builder()
+      .name(LectureCategory.BASIC)
       .lecture(lecture3)
       .build();
 
@@ -106,8 +105,8 @@ class LectureControllerDocTest {
             .attributes(key("type").value("Number")),
           parameterWithName("size").description("조회 개수").optional()
             .attributes(key("type").value("Number")),
-          parameterWithName("category").description("강의 카테고리").optional()
-            .attributes(key("type").value("LectureEnumCategory")),
+          parameterWithName("category").description("link:index.html#_lecturecategory[상태 코드]").optional()
+            .attributes(key("type").value("LectureCategory")),
           parameterWithName("direction").description("조회 정렬 방향").optional()
             .attributes(key("type").value("Direction"))
         ),
