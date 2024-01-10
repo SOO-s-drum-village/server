@@ -19,4 +19,8 @@ Content-Type: application/json
   "password": "a123456!"
 }
 
-### 유저 페이지
+
+### 로그아웃
+
+POST http://localhost:8080/auth/logout
+Content-Type: application/json

@@ -9,6 +9,7 @@ import com.drum_village_server.api.config.handler.LoginSuccessHandler;
 import com.drum_village_server.api.domain.User;
 import com.drum_village_server.api.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -46,9 +47,22 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     return http
       .authorizeHttpRequests(request -> request
-        .anyRequest().permitAll()
+        .requestMatchers("/test*").permitAll()
+        .requestMatchers("/lectures").permitAll()
+        .requestMatchers("/enums").permitAll()
+        .requestMatchers("/auth/*").permitAll()
+        .requestMatchers("/docs/*").permitAll()
+        .requestMatchers("/lectures/{lectureId}").hasRole("USER")
       )
       .addFilterBefore(emailPasswordAuthFilter(), UsernamePasswordAuthenticationFilter.class)
+      .logout(logout -> logout
+        .logoutUrl("/auth/logout")
+        .logoutSuccessHandler((request, response, authentication) -> {
+          response.setStatus(HttpServletResponse.SC_OK);
+        })
+        .invalidateHttpSession(true)
+        .deleteCookies("JSESSIONID")
+      )
       .exceptionHandling(e -> {
         e.accessDeniedHandler(new Http403Handler(objectMapper));
         e.authenticationEntryPoint(new Http401Handler(objectMapper));

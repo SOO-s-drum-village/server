@@ -1,5 +1,6 @@
 package com.drum_village_server.api.domain;
 
+import com.drum_village_server.api.domain.payment.Payment;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -28,9 +29,15 @@ public class User {
   @Column(name = "password")
   private String password;
 
+  @Column(name = "is_delted")
+  private Boolean isDeleted = false;
+
   @CreatedDate
   @Column(name = "created_at", columnDefinition = "timestamp with time zone not null")
   private LocalDateTime createdAt = LocalDateTime.now();
+
+  @OneToOne(mappedBy = "user",cascade = CascadeType.REMOVE)
+  private Payment payment;
 
   @Builder
   public User(String name, String email, String password) {

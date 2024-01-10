@@ -12,7 +12,7 @@ public class UserPrincipal extends User {
   public UserPrincipal(com.drum_village_server.api.domain.User user) {
     super(user.getEmail(), user.getPassword(),
       List.of(
-        new SimpleGrantedAuthority("USER")
+        new SimpleGrantedAuthority("ROLE_USER")
       ));
     this.userId = user.getId();
   }

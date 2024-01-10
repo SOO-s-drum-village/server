@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@AutoConfigureRestDocs(uriScheme = "https", uriHost = "api-ssmusicweb.com", uriPort = 443)
+@AutoConfigureRestDocs(uriScheme = "https", uriHost = "api-ssmusicweb.shop", uriPort = 443)
 @ExtendWith(RestDocumentationExtension.class)
 class CommonDocControllerTest {
 

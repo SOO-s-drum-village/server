@@ -1,4 +1,4 @@
-package com.drum_village_server.api.response;
+package com.drum_village_server.api.response.lecture;
 
 import com.drum_village_server.api.domain.Lecture;
 import com.drum_village_server.api.domain.enums.LectureCategory;
@@ -7,16 +7,20 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class LectureResponse {
+public class LectureDetailResponse {
   private final Long id;
   private final String title;
   private final Integer level;
+  private final String lectureUrl;
+  private final String imageUrl;
   private final List<LectureCategory> categories;
 
-  public LectureResponse(Lecture lecture) {
+  public LectureDetailResponse(Lecture lecture) {
     this.id = lecture.getId();
     this.title = lecture.getTitle();
     this.level = lecture.getLevel();
+    this.lectureUrl = lecture.getLectureUrl();
+    this.imageUrl = lecture.getImageUrl();
     this.categories = lecture.getCategories().stream().map(com.drum_village_server.api.domain.LectureCategory::getName).toList();
   }
 }

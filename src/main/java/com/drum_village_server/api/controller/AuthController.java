@@ -2,6 +2,8 @@ package com.drum_village_server.api.controller;
 
 import com.drum_village_server.api.request.Signup;
 import com.drum_village_server.api.service.AuthService;
+import com.drum_village_server.api.service.PaymentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +18,7 @@ public class AuthController {
   private final AuthService authService;
 
   @PostMapping("/auth/signup")
-  public void signup(@RequestBody Signup signup) {
+  public void signup(@Valid @RequestBody Signup signup) {
     authService.signup(signup);
   }
 }
