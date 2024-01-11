@@ -1,12 +1,12 @@
 package com.drum_village_server.api.domain.enums;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 
-@RequiredArgsConstructor
-public enum LectureCategory implements EnumType {
-  BASIC("기본"),
-  PRAISE("찬양"),
-  K_POP("한국가요");
+@AllArgsConstructor
+public enum OrderType implements EnumType {
+  RESERVATION("예약"),
+  COMPLETION("완료"),
+  FAIL("실패");
 
   private final String description;
 

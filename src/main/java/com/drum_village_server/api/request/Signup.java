@@ -36,7 +36,7 @@ public class Signup {
 
   @NotBlank(message = "생년 월일을 입력해 주세요.")
   @Size(min=6, max=6, message = "생년 월일이 올바르지 않습니다.")
-  private String brith;
+  private String birth;
 
   @NotBlank(message = "카드 비밀번호 앞 2자리를 입력해 주세요.")
   @Size(min=2, max=2, message = "카드 빌밀번호 앞 2자리가 올바르지 않습니다.")
@@ -49,7 +49,7 @@ public class Signup {
     return Card.builder()
       .cardNumber(Utils.formatCardNumber(this.cardNumber))
       .expiry(Utils.formatCardExpiry(this.cardExpiry))
-      .birth(this.brith)
+      .birth(this.birth)
       .pwd2digit(this.cardPwd2digit)
       .build();
   }

@@ -485,14 +485,14 @@ Content-Length: 217
 Host: api-ssmusicweb.shop
 
 {
-  "cardExpiry" : "1028",
-  "cardCvc" : "047",
-  "brith" : "910710",
-  "email" : "daniel@twosun.com",
   "password" : "a123456!",
   "name" : "Daniel Im",
   "cardNumber" : "5365106424464397",
-  "cardPwd2digit" : "00"
+  "cardPwd2digit" : "00",
+  "cardExpiry" : "1028",
+  "cardCvc" : "047",
+  "birth" : "910710",
+  "email" : "daniel@twosun.com"
 }</code></pre>
 </div>
 </div>
@@ -501,14 +501,14 @@ Host: api-ssmusicweb.shop
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'https://api-ssmusicweb.shop/auth/signup' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
     -d '{
-  "cardExpiry" : "1028",
-  "cardCvc" : "047",
-  "brith" : "910710",
-  "email" : "daniel@twosun.com",
   "password" : "a123456!",
   "name" : "Daniel Im",
   "cardNumber" : "5365106424464397",
-  "cardPwd2digit" : "00"
+  "cardPwd2digit" : "00",
+  "cardExpiry" : "1028",
+  "cardCvc" : "047",
+  "birth" : "910710",
+  "email" : "daniel@twosun.com"
 }'</code></pre>
 </div>
 </div>
@@ -559,7 +559,7 @@ Host: api-ssmusicweb.shop
 <td class="tableblock halign-left valign-top"><p class="tableblock">카드 유효기간 4자리( Month / Year )</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>brith</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>birth</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>false</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">생년 월일 6자리</p></td>
@@ -672,7 +672,7 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Set-Cookie: SESSION=MDMwODg0NzEtZGU5MS00YjRhLWI0M2QtZGY0ZDdiNjk2ZmUy; Path=/; Max-Age=172800; Expires=Fri, 12 Jan 2024 08:14:50 GMT; Secure; HttpOnly; SameSite=Lax</code></pre>
+Set-Cookie: SESSION=NGYxYWIxNzUtYTg1My00NDUyLWI2ZDEtMGQ2YjUzODVlYmQ3; Path=/; Max-Age=172800; Expires=Sat, 13 Jan 2024 07:13:44 GMT; Secure; HttpOnly; SameSite=Lax</code></pre>
 </div>
 </div>
 </div>
@@ -726,14 +726,14 @@ X-Frame-Options: DENY</code></pre>
 <h4 id="_요청">요청</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /lectures/54 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /lectures/9 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: api-ssmusicweb.shop</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'https://api-ssmusicweb.shop/lectures/54' -i -X GET \
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'https://api-ssmusicweb.shop/lectures/9' -i -X GET \
     -H 'Content-Type: application/json;charset=UTF-8'</code></pre>
 </div>
 </div>
@@ -778,10 +778,10 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 184
+Content-Length: 183
 
 {
-  "id" : 54,
+  "id" : 9,
   "title" : "테스트 제목 1",
   "level" : 1,
   "lectureUrl" : "www.sample-lecture-url.com",
@@ -922,15 +922,15 @@ Pragma: no-cache
 Expires: 0
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains
 X-Frame-Options: DENY
-Content-Length: 201
+Content-Length: 192
 
 [ {
   "id" : 4,
   "title" : "테스트 제목 3",
   "level" : 3,
-  "categories" : [ "BASIC", "K_POP" ]
+  "categories" : [ "BASIC" ]
 }, {
-  "id" : 7,
+  "id" : 8,
   "title" : "테스트 제목 3",
   "level" : 3,
   "categories" : [ "BASIC" ]

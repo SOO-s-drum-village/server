@@ -12,7 +12,7 @@ public class PaymentCreator {
   private final User user;
   private final String cardNumber;
   private final String cardExpiry;
-  private final String brith;
+  private final String birth;
   private final String cardPwd2digit;
   private final String cardCvc;
 
@@ -21,7 +21,7 @@ public class PaymentCreator {
     this.user = user;
     this.cardNumber = Utils.formatCardNumber(cardNumber);
     this.cardExpiry = Utils.formatCardExpiry(cardExpiry);
-    this.brith = brith;
+    this.birth = brith;
     this.cardPwd2digit = cardPwd2digit;
     this.cardCvc = cardCvc;
   }

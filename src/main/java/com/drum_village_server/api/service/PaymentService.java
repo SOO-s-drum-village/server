@@ -56,7 +56,6 @@ public class PaymentService {
   }
 
   public void verifyCard(Card card) {
-    log.info(">>>>>>>>>>>>{}", card.getExpiry());
     String accessToken = getAccessToken();
 
     RestTemplate rt = new RestTemplate();
@@ -83,10 +82,7 @@ public class PaymentService {
       Map.class
     );
 
-    log.info(">>>>>>>>>>>>{}", response);
-
     Integer responseCode = (Integer) response.getBody().get("code");
-
     if (responseCode != 0) {
       throw new InvalidCard();
     }

@@ -63,7 +63,9 @@ public class OrderJob {
 
   @Bean
   public ItemProcessor<Order, Order> orderProcessor() {
-    return item -> item.editIsDone(true);
+//    return item -> item.editIsDone(true);
+//    return item
+    return item -> item;
   }
 
   @Bean

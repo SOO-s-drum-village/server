@@ -55,7 +55,7 @@ class AuthControllerDocTest {
       "email", "daniel@twosun.com",
       "cardNumber","5365106424464397",
       "cardExpiry","1028",
-      "brith","910710",
+      "birth","910710",
       "cardPwd2digit","00",
       "cardCvc","047"
     ));
@@ -75,7 +75,7 @@ class AuthControllerDocTest {
           fieldWithPath("password").type(JsonFieldType.STRING).description("유저 패스워드"),
           fieldWithPath("cardNumber").type(JsonFieldType.STRING).description("카드 번호 16자리"),
           fieldWithPath("cardExpiry").type(JsonFieldType.STRING).description("카드 유효기간 4자리( Month / Year )"),
-          fieldWithPath("brith").type(JsonFieldType.STRING).description("생년 월일 6자리"),
+          fieldWithPath("birth").type(JsonFieldType.STRING).description("생년 월일 6자리"),
           fieldWithPath("cardPwd2digit").type(JsonFieldType.STRING).description("카드 비밀번호 앞 2자리"),
           fieldWithPath("cardCvc").type(JsonFieldType.STRING).description("카드 CVC번호 6자리")
         )

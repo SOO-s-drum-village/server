@@ -1,16 +1,22 @@
 package com.drum_village_server.api.service;
 
 import com.drum_village_server.api.domain.Order;
+import com.drum_village_server.api.domain.enums.OrderType;
+import com.drum_village_server.api.domain.payment.Payment;
 import com.drum_village_server.api.repository.OrderRepository;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 @Slf4j
@@ -18,6 +24,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class OrderService {
 
+  private final static int PAY_AMOUNT = 1000;
   private final OrderRepository orderRepository;
   private final PaymentService paymentService;
 
@@ -25,7 +32,8 @@ public class OrderService {
     orderRepository.save(order);
   }
 
-  public void pay() {
+  @Transactional
+  public void reserveOrder(Payment payment, LocalDateTime scheduleAt) {
     String accessToken = paymentService.getAccessToken();
 
     Gson str = new Gson();
@@ -34,23 +42,13 @@ public class OrderService {
     headers.setContentType(MediaType.APPLICATION_JSON);
     headers.setBearerAuth(accessToken);
 
-    JsonObject scheduleJsonObject = new JsonObject();
-    scheduleJsonObject.addProperty("merchant_uid", "aaaaaa");
-    scheduleJsonObject.addProperty("schedule_at", 1704779015215L);
-    scheduleJsonObject.addProperty("currency", "KRW");
-    scheduleJsonObject.addProperty("amount", 1000);
+    Long userId = payment.getUser().getId();
+    long now = new Date().getTime();
 
-    JsonArray jsonArr = new JsonArray();
-    jsonArr.add(scheduleJsonObject);
+    String merchantUid = userId.toString() + "_" + now + "_" + UUID.randomUUID();
 
-    JsonObject reqJson = new JsonObject();
-    reqJson.addProperty("customer_uid", "aaa");
-    reqJson.addProperty("card_number", "5570-4297-1413-3097");
-    reqJson.addProperty("expiry", "2029-10");
-    reqJson.addProperty("birth", "910710");
-    reqJson.addProperty("pwd_2digit", "00");
-    reqJson.addProperty("cvc", "681");
-    reqJson.add("schedules",jsonArr);
+    JsonArray schedules = createSchedules(merchantUid, scheduleAt);
+    JsonObject reqJson = createPaymentJson(payment, schedules);
     String json = str.toJson(reqJson);
 
     HttpEntity<String> entity = new HttpEntity<>(json, headers);
@@ -62,8 +60,50 @@ public class OrderService {
       Map.class
     );
 
-    log.info(">>>>>>>>>>>>>>>>>>>{}",response);
+    Integer responseCode = (Integer) response.getBody().get("code");
+    String responseMessage = (String) response.getBody().get("message");
 
+    OrderType orderType = responseCode == 0 ? OrderType.RESERVATION : OrderType.FAIL;
+
+    Order order = Order.builder()
+      .merchantUid(merchantUid)
+      .amount(PAY_AMOUNT)
+      .type(orderType)
+      .description(responseMessage)
+      .user(payment.getUser())
+      .scheduleAt(scheduleAt)
+      .build();
+
+    orderRepository.save(order);
+  }
+
+  private JsonArray createSchedules(String merchantUid, LocalDateTime scheduleAt) {
+    ZonedDateTime zdt = ZonedDateTime.of(scheduleAt, ZoneId.systemDefault());
+    long date = zdt.toInstant().toEpochMilli();
+
+    JsonObject scheduleJsonObject = new JsonObject();
+    scheduleJsonObject.addProperty("merchant_uid", merchantUid);
+    scheduleJsonObject.addProperty("schedule_at", date);
+    scheduleJsonObject.addProperty("currency", "KRW");
+    scheduleJsonObject.addProperty("amount", 1000);
+
+    JsonArray jsonArr = new JsonArray();
+    jsonArr.add(scheduleJsonObject);
+
+    return jsonArr;
+  }
+
+  private JsonObject createPaymentJson(Payment payment, JsonArray schedules) {
+    JsonObject paymentJson = new JsonObject();
+    paymentJson.addProperty("customer_uid", payment.getUser().getId().toString());
+    paymentJson.addProperty("card_number", payment.getCardNumber());
+    paymentJson.addProperty("expiry", payment.getCardExpiry());
+    paymentJson.addProperty("birth", payment.getBirth());
+    paymentJson.addProperty("pwd_2digit", payment.getCardPwd2digit());
+    paymentJson.addProperty("cvc", payment.getCardCvc());
+    paymentJson.add("schedules", schedules);
+
+    return paymentJson;
   }
 
 

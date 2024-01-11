@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -38,6 +39,9 @@ public class User {
 
   @OneToOne(mappedBy = "user",cascade = CascadeType.REMOVE)
   private Payment payment;
+
+  @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+  private List<Order> orders;
 
   @Builder
   public User(String name, String email, String password) {

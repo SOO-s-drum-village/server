@@ -26,8 +26,8 @@ public class Payment {
   @Column(name = "card_expiry")
   private String cardExpiry;
 
-  @Column(name = "brith")
-  private String brith;
+  @Column(name = "birth")
+  private String birth;
 
   @Column(name = "card_pwd_2digit")
   private String cardPwd2digit;
@@ -37,6 +37,9 @@ public class Payment {
 
   @Column(name = "subscription")
   private Boolean subscription = true;
+
+  @Column(name = "last_order_at")
+  private LocalDateTime lastOrderAt;
 
   @CreatedDate
   @Column(name = "created_at", columnDefinition = "timestamp with time zone not null")
@@ -51,7 +54,7 @@ public class Payment {
     this.user = paymentCreator.getUser();
     this.cardNumber = paymentCreator.getCardNumber();
     this.cardExpiry = paymentCreator.getCardExpiry();
-    this.brith = paymentCreator.getBrith();
+    this.birth = paymentCreator.getBirth();
     this.cardPwd2digit = paymentCreator.getCardPwd2digit();
     this.cardCvc = paymentCreator.getCardCvc();
   }
