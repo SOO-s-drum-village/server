@@ -30,6 +30,16 @@ include::{snippets}/logout/curl-request.adoc[]
 ==== response
 include::{snippets}/logout/http-response.adoc[]
 
+== USER
+=== 내 정보 조회
+==== 요청
+include::{snippets}/get-me/http-request.adoc[]
+include::{snippets}/get-me/curl-request.adoc[]
+
+==== 응답
+include::{snippets}/get-me/http-response.adoc[]
+include::{snippets}/get-me/response-fields.adoc[]
+
 == Lecture
 === 강의 단건 조회
 ==== 요청

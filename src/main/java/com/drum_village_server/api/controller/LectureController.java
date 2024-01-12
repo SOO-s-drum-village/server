@@ -26,8 +26,6 @@ import java.util.List;
 public class LectureController {
 
   private final LectureService lectureService;
-  private final OrderService orderService;
-  private final PaymentService paymentService;
 
   @GetMapping("/lectures")
   public List<LectureResponse> getList(@ModelAttribute LectureSearch request) {
@@ -42,26 +40,7 @@ public class LectureController {
 
   @GetMapping("/test")
   public void test() {
-    User user = User.builder()
-      .password("a123456!")
-      .email("chorales@naver.com")
-      .name("임성준")
-      .build();
-
-    PaymentCreator paymentCreator = PaymentCreator.builder()
-      .birth("910710")
-      .cardPwd2digit("00")
-      .cardNumber("5365-1064-2446-4397")
-      .cardExpiry("2028-10")
-      .cardCvc("047")
-      .user(user)
-      .build();
-
-    Payment payment = Payment.builder()
-      .paymentCreator(paymentCreator)
-      .build();
-
-    orderService.reserveOrder(payment, LocalDateTime.now());
+//    orderService.reserveOrder(payment, LocalDateTime.now());
   }
 
 }

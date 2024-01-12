@@ -11,12 +11,14 @@ public class LectureResponse {
   private final Long id;
   private final String title;
   private final Integer level;
+  private final String imageUrl;
   private final List<LectureCategory> categories;
 
   public LectureResponse(Lecture lecture) {
     this.id = lecture.getId();
     this.title = lecture.getTitle();
     this.level = lecture.getLevel();
+    this.imageUrl = lecture.getImageUrl();
     this.categories = lecture.getCategories().stream().map(com.drum_village_server.api.domain.LectureCategory::getName).toList();
   }
 }

@@ -159,6 +159,7 @@ class LectureControllerDocTest {
           fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("강의 ID"),
           fieldWithPath("[].title").type(JsonFieldType.STRING).description("강의 제목"),
           fieldWithPath("[].level").type(JsonFieldType.NUMBER).description("강의 레벨"),
+          fieldWithPath("[].imageUrl").type(JsonFieldType.STRING).description("강의 이미지 주소 URL"),
           fieldWithPath("[].categories").type(JsonFieldType.ARRAY).description("강의 카테고리 목록")
         )
       ));

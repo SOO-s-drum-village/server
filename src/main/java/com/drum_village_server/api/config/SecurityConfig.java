@@ -52,6 +52,7 @@ public class SecurityConfig {
         .requestMatchers("/enums").permitAll()
         .requestMatchers("/auth/*").permitAll()
         .requestMatchers("/docs/*").permitAll()
+        .requestMatchers("/users/*").hasRole("USER")
         .requestMatchers("/lectures/{lectureId}").hasRole("USER")
       )
       .addFilterBefore(emailPasswordAuthFilter(), UsernamePasswordAuthenticationFilter.class)
